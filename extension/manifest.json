@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Fulcrum MCAT helper",
+  "version": "1.0.0",
+  "description": "Send MCAT questions you just did on UWorld, AAMC and other sites to Fulcrum with one click.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Send this page to Fulcrum",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.uworld.com/*",
+        "https://*.aamc.org/*",
+        "https://*.blueprintprep.com/*",
+        "https://*.kaptest.com/*",
+        "https://*.jackwestin.com/*",
+        "https://*.princetonreview.com/*",
+        "https://*.khanacademy.org/*",
+        "https://*.magoosh.com/*"
+      ],
+      "js": [
+        "qbank.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.github.io/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
