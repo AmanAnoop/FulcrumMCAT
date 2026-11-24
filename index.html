@@ -3,10 +3,10 @@
 <title>Triage MCAT</title>
 <meta name="weakspot-app" content="1">
 <meta name="description" content="Triage MCAT finds the subtopics you miss and keeps drilling them until they stick.">
-<meta name="theme-color" content="#0b3542">
+<meta name="theme-color" content="#121416">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3542'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23ffffff'/%3E%3Ccircle cx='23.5' cy='8.5' r='3' fill='%23e5484d'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121416'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23ffffff'/%3E%3Ccircle cx='23.5' cy='8.5' r='3' fill='%23e5484d'/%3E%3C/svg%3E">
 <style>
 /* VOICE: calm, exacting, premium — a private study tool, not a dashboard template
    IDEA: a bound medical-board score report: dark masthead, warm paper, ruled panels, big serif figures
@@ -235,10 +235,39 @@ details.topic summary:hover,.srow:hover{background:var(--sunk)}
 .drop textarea:focus{border-color:var(--teal)}
 button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:var(--teal)}
 @media(max-width:600px){.hero .big{font-size:64px}.ecg{height:40%}}
+
+/* UPSCALE CLINICAL — warm neutral paper, ink masthead, serif figures; medicine shows only in the cross, the ECG trace and the triage tags */
+:root{
+--bg:light-dark(#f5f4f0,#0f1012);--surf:light-dark(#ffffff,#17181b);--sunk:light-dark(#f9f8f5,#131416);--line:light-dark(#e5e2db,#27282c);--line2:light-dark(#d5d1c8,#34363b);
+--ink:light-dark(#15171a,#ecebe6);--mute:light-dark(#6e6c67,#9b9993);--faint:light-dark(#a9a69f,#5d5b57);
+--red:light-dark(#c8333a,#ff6f6f);--redbg:light-dark(#fbecec,#2b1617);--amb:light-dark(#a06d06,#e8b44a);--ambbg:light-dark(#fbf3df,#2a2213);
+--blue:light-dark(#2f7a55,#5fca94);--bluebg:light-dark(#eaf4ee,#13261c);--ok:light-dark(#2f7a55,#5fca94);--okbg:light-dark(#eaf4ee,#13261c);
+--teal:var(--ink);--mast:#121416;--mastink:#f1efe9;--shadow:0 1px 2px rgba(21,23,26,.04),0 6px 22px rgba(21,23,26,.045)}
+::selection{background:var(--ink);color:var(--bg)}
+header{background:var(--mast);box-shadow:none}
+.brand{font:400 26px/1 "Instrument Serif",Georgia,serif;letter-spacing:-.005em}
+.brand span{color:#9b998f;border-color:#3a3b3f;font-family:"IBM Plex Sans",sans-serif}
+nav a{color:#a7a59c}nav a.on{color:#fff;border-color:#d33a3f}nav a .badge{background:#d33a3f}
+h1{font:400 clamp(38px,5vw,54px)/1.02 "Instrument Serif",Georgia,serif;letter-spacing:-.01em}
+.stat::before{display:none}
+.stat b{font:400 clamp(40px,4.6vw,54px)/.95 "Instrument Serif",Georgia,serif;letter-spacing:-.01em}
+.hero{background:var(--mast);color:var(--mastink)}
+.hero .big{font:400 88px/.85 "Instrument Serif",Georgia,serif;letter-spacing:-.01em;color:#fff}
+.hero h2{color:#fff}.hero p{color:#a9a79f}
+.hero button.pri{background:#f1efe9;color:#121416;border-color:#f1efe9}.hero button.pri:hover{background:#fff}
+.ecg{opacity:.55;height:26%}.ecg polyline{stroke:#d33a3f;stroke-width:1.6}.hero.calm .ecg polyline{stroke:#5fca94}
+button.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}button.pri:hover:not(:disabled){background:color-mix(in srgb,var(--ink) 85%,var(--red))}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.rlabel b{font:400 34px/1 "Instrument Serif",Georgia,serif;letter-spacing:0}.rwrap.big .rlabel b{font-size:48px}
+.ring.ink{color:var(--ink)}
+.result .big{font:400 76px/.9 "Instrument Serif",Georgia,serif}.ptitle{font:400 24px/1.15 "Instrument Serif",Georgia,serif}
+.prog i{background:var(--ink)}.take{border-left-color:var(--ink)}
+.hy{color:var(--mute);border-color:var(--line2);background:none}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:var(--red)}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head><body>
-<header><div class="bar"><a class="brand" href="#home"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#13a3a5"/><path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#fff"/><circle cx="23.5" cy="8.5" r="3" fill="#e5484d"/></svg>Triage<span>MCAT</span></a>
+<header><div class="bar"><a class="brand" href="#home"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#f4f2ed"/><path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#121416"/><circle cx="23.5" cy="8.5" r="3" fill="#d33a3f"/></svg>Triage<span>MCAT</span></a>
 <nav><a href="#home" data-v="home">Home<span class="badge" id="dueBadge" hidden></span></a><a href="#practice" data-v="practice">Practice</a><a href="#progress" data-v="progress">Progress</a><a href="#mistakes" data-v="mistakes">Mistakes</a><a href="#settings" data-v="settings" class="gear" aria-label="Settings"><span class="gtxt">Settings</span><svg class="gico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a></nav></div></header>
 <main>
 <div id="status"></div>

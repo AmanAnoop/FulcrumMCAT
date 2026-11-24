@@ -27,11 +27,11 @@
   const root = host.attachShadow({ mode: 'open' });
   root.innerHTML = `<style>
     .w{font:500 13px/1.3 system-ui,sans-serif;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-    button{all:unset;cursor:pointer;background:#0b3542;color:#e6f2f4;padding:10px 14px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;gap:8px;align-items:center}
-    button:hover{background:#0e4a58} i{width:8px;height:8px;border-radius:50%;background:#e5484d;display:inline-block}
+    button{all:unset;cursor:pointer;background:#121416;color:#f1efe9;padding:10px 14px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;gap:8px;align-items:center}
+    button:hover{background:#000} i{width:8px;height:8px;border-radius:50%;background:#d33a3f;display:inline-block}
     label{background:#fff;color:#111;padding:6px 10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;gap:6px;align-items:center;cursor:pointer}
     .w:hover label{display:flex}
-    .t{background:#0b3542;color:#fff;padding:9px 12px;border-radius:8px;display:none;max-width:260px} .t a{color:#7fe3df}
+    .t{background:#121416;color:#fff;padding:9px 12px;border-radius:8px;display:none;max-width:260px} .t a{color:#f3a5a5}
   </style><div class="w"><div class="t" id="t"></div><label><input type="checkbox" id="auto"> Auto-send after each answer</label><button id="b"><i></i>Send to Triage</button></div>`;
   document.documentElement.appendChild(host);
   const t = root.getElementById('t');
