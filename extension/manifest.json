@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Fulcrum MCAT helper",
+  "name": "Triage MCAT helper",
   "version": "1.0.0",
-  "description": "Send MCAT questions you just did on UWorld, AAMC and other sites to Fulcrum with one click.",
+  "description": "Send MCAT questions you just did on UWorld, AAMC and other sites to Triage MCAT with one click.",
   "permissions": [
     "storage",
     "activeTab",
     "scripting"
   ],
   "action": {
-    "default_title": "Send this page to Fulcrum",
+    "default_title": "Send this page to Triage",
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",

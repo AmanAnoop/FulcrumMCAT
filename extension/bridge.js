@@ -1,4 +1,4 @@
-// Runs on the Fulcrum website. Hands queued questions to the app, then clears them.
+// Runs on the Triage website. Hands queued questions to the app, then clears them.
 (() => {
   if (!document.querySelector('meta[name="weakspot-app"]')) return;
   chrome.storage.local.set({ appUrl: location.origin + location.pathname });

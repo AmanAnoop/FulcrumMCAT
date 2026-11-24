@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fulcrum MCAT</title>
+<title>Triage MCAT</title>
 <meta name="weakspot-app" content="1">
-<meta name="description" content="MCAT practice that finds your weak subtopics and keeps quizzing you on them.">
+<meta name="description" content="Triage MCAT finds the subtopics you miss and keeps drilling them until they stick.">
+<meta name="theme-color" content="#0b3542">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111215'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23e0476a'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b3542'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='%23ffffff'/%3E%3Ccircle cx='23.5' cy='8.5' r='3' fill='%23e5484d'/%3E%3C/svg%3E">
 <style>
 /* VOICE: calm, exacting, premium — a private study tool, not a dashboard template
    IDEA: a bound medical-board score report: dark masthead, warm paper, ruled panels, big serif figures
@@ -185,10 +186,59 @@ details.topic .subs .srow{padding:12px 16px 12px 26px}.field{grid-template-colum
 @media(max-width:600px){.ringgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.ringbig{flex-direction:column;text-align:center;padding:22px}.rwrap{width:96px}}
 .gico{display:none}
 @media(max-width:600px){.gtxt{display:none}.gico{display:block}nav a.gear{margin-left:auto;padding:0 10px}#pGo{width:100%}}
+
+/* TRIAGE MCAT — clinical theme: scrub teal masthead, cool chart paper, ER triage colours (red / yellow / green) for mastery, IBM Plex Sans with monitor-style light numerals */
+:root{
+--bg:light-dark(#eef3f4,#071a20);--surf:light-dark(#ffffff,#0d2229);--sunk:light-dark(#f5f9fa,#0a1d23);--line:light-dark(#dbe4e7,#1c343c);--line2:light-dark(#c5d2d7,#28434c);
+--ink:light-dark(#0d2530,#e4eef1);--mute:light-dark(#587079,#8fa7b0);--faint:light-dark(#9db0b7,#4d666f);
+--red:light-dark(#cf2e2e,#ff6b66);--redbg:light-dark(#fdeceb,#2c1416);--amb:light-dark(#a87300,#f5c242);--ambbg:light-dark(#fff5d9,#2a2210);
+--blue:light-dark(#178a57,#4fd08f);--bluebg:light-dark(#e3f5ec,#0f2a1e);--ok:light-dark(#178a57,#4fd08f);--okbg:light-dark(#e3f5ec,#0f2a1e);
+--teal:light-dark(#0f8f92,#3fd0cc);--mast:#0b3542;--mastink:#e6f2f4;--shadow:0 1px 2px rgba(13,37,48,.05),0 6px 20px rgba(13,37,48,.05)}
+body{font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px}
+::selection{background:var(--teal);color:#fff}
+header{background:var(--mast);box-shadow:0 1px 0 rgba(255,255,255,.04)}
+.brand{font:600 21px/1 "IBM Plex Sans",sans-serif;letter-spacing:-.02em;gap:10px;align-items:center}
+.brand .logo{width:28px;height:28px;flex:none}
+.brand span{font:500 10.5px/1 "IBM Plex Sans",sans-serif;color:#8fb9c2;border-color:#24525f;transform:none}
+nav a{color:#9cbcc4}nav a:hover{color:#fff}nav a.on{color:#fff;border-color:#3fd0cc}
+nav a .badge{background:#e5484d}
+h1{font:600 clamp(30px,4vw,42px)/1.08 "IBM Plex Sans",sans-serif;letter-spacing:-.025em}
+h2{font-weight:600;letter-spacing:-.01em}
+.stat b{font:300 clamp(36px,4.4vw,50px)/1 "IBM Plex Sans",sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat{position:relative}.stat::before{content:"";position:absolute;left:24px;top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--teal)}
+.stat:nth-child(2)::before{background:var(--ok)}.stat:nth-child(3)::before{background:var(--amb)}.stat:nth-child(4)::before{background:var(--red)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#0b3542 0%,#0e4a58 100%);color:#e6f2f4}
+.hero>*:not(.ecg){position:relative}
+.hero .big{font:300 84px/.85 "IBM Plex Sans",sans-serif;letter-spacing:-.04em;color:#fff}
+.hero h2{font-size:21px;color:#fff}.hero p{color:#a9cbd2}
+.hero button.pri{background:#fff;color:#0b3542;border-color:#fff;font-weight:600}.hero button.pri:hover{background:#e6f7f7}
+.ecg{position:absolute;inset:auto 0 0 0;width:100%;height:30%;opacity:.28}
+.ecg polyline{fill:none;stroke:#3fd0cc;stroke-width:2;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:ecg 3.2s linear infinite}
+.hero.calm .ecg polyline{stroke:#4fd08f}
+@keyframes ecg{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.ecg polyline{animation:none;stroke-dashoffset:0}}
+button.pri{background:var(--mast);border-color:var(--mast);color:#fff}button.pri:hover:not(:disabled){background:#0e4a58}
+:root[data-theme=dark] button.pri,.x-dark button.pri{background:var(--teal);border-color:var(--teal);color:#04161b}
+.seg button.on{background:var(--mast);color:#fff}
+.meter i{background:var(--ok)}.meter.lo i{background:var(--red)}.meter.mid i{background:var(--amb)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2px 8px 2px 7px;border-radius:5px;margin-right:6px;vertical-align:1px}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.t-red{background:var(--redbg);color:var(--red)}.t-yel{background:var(--ambbg);color:var(--amb)}.t-grn{background:var(--okbg);color:var(--ok)}.t-none{background:var(--sunk);color:var(--mute);border:1px solid var(--line)}
+.sbar small{display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.rlabel b{font:300 32px/1 "IBM Plex Sans",sans-serif;letter-spacing:-.03em}.rwrap.big .rlabel b{font-size:44px}
+.ring.ink{color:var(--teal)}
+.result .big,.ptitle{font-family:"IBM Plex Sans",sans-serif}.result .big{font-weight:300;letter-spacing:-.04em}.ptitle{font-weight:600;font-size:19px}
+.hy{color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,transparent);background:var(--redbg)}
+.prog i{background:var(--teal)}
+.fb.good strong{color:var(--ok)}
+.take{border-left-color:var(--teal)}
+details.topic summary:hover,.srow:hover{background:var(--sunk)}
+.drop textarea:focus{border-color:var(--teal)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:var(--teal)}
+@media(max-width:600px){.hero .big{font-size:64px}.ecg{height:40%}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head><body>
-<header><div class="bar"><a class="brand" href="#home">Fulcrum<span>MCAT</span></a>
+<header><div class="bar"><a class="brand" href="#home"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#13a3a5"/><path d="M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z" fill="#fff"/><circle cx="23.5" cy="8.5" r="3" fill="#e5484d"/></svg>Triage<span>MCAT</span></a>
 <nav><a href="#home" data-v="home">Home<span class="badge" id="dueBadge" hidden></span></a><a href="#practice" data-v="practice">Practice</a><a href="#progress" data-v="progress">Progress</a><a href="#mistakes" data-v="mistakes">Mistakes</a><a href="#settings" data-v="settings" class="gear" aria-label="Settings"><span class="gtxt">Settings</span><svg class="gico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a></nav></div></header>
 <main>
 <div id="status"></div>
@@ -197,7 +247,7 @@ details.topic .subs .srow{padding:12px 16px 12px 26px}.field{grid-template-colum
  <div id="hero"></div>
  <div class="stats" id="kpis"></div>
  <div class="rings" id="rings"></div>
- <h2>Weak spots</h2>
+ <h2>Needs attention</h2>
  <div class="list" id="weak"></div>
 </section>
 
@@ -251,7 +301,7 @@ details.topic .subs .srow{padding:12px 16px 12px 26px}.field{grid-template-colum
  <h2>Your data</h2>
  <div class="card"><p class="mtxt" style="margin:0 0 14px" id="dataNote"></p><div class="row"><button id="expBtn">Export</button><label style="margin:0"><input type="file" id="impFile" accept="application/json" hidden><span class="btnlike">Import</span></label><button id="resetBtn" class="danger">Reset everything</button></div><p class="mtxt" id="dataMsg"></p></div>
  <h2>Chrome helper</h2>
- <div class="card"><p class="mtxt" style="margin:0">Install the Fulcrum MCAT helper from the project’s <b>extension</b> folder. It adds a <b>Send to Fulcrum</b> button on UWorld, AAMC and other MCAT sites, so missed questions get saved with one click.</p></div>
+ <div class="card"><p class="mtxt" style="margin:0">Install the Triage MCAT helper from the project’s <b>extension</b> folder. It adds a <b>Send to Triage</b> button on UWorld, AAMC and other MCAT sites, so missed questions get saved with one click.</p></div>
 </section>
 
 <section id="v-run" hidden><div id="run"></div></section>
@@ -329,12 +379,14 @@ const pct=m=>m==null?'—':Math.round(m*100)+'%';
 function meter(m,wide){return `<div class="meter ${mClass(m)}${wide?' wide':''}"><i style="width:${m==null?0:Math.round(m*100)}%"></i></div>`}
 
 /* ---------- views ---------- */
+const ECG='<svg class="ecg" viewBox="0 0 600 80" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,48 120,48 140,48 152,40 162,48 182,48 192,58 204,8 216,72 228,48 262,48 280,34 300,48 420,48 440,48 452,40 462,48 482,48 492,58 504,8 516,72 528,48 562,48 580,34 600,48"/></svg>';
+function tag(m){return m==null?'<span>Not practiced</span>':m<.4?'<span class="tag t-red">Needs work</span>':m<.7?'<span class="tag t-yel">Getting there</span>':'<span class="tag t-grn">Solid</span>'}
 function renderHome(){
  const s=stats(),due=dueList(),now=Date.now();
  $('#dueBadge').hidden=!due.length;$('#dueBadge').textContent=due.length;
  const names=[...new Set(due.map(k=>ENT[k].name))];
- $('#hero').innerHTML=due.length?`<div class="hero"><div class="big">${due.length}</div><div><h2>to review today</h2><p>${names.slice(0,3).map(esc).join(' · ')}${names.length>3?` +${names.length-3} more`:''}</p></div><button class="pri" id="revGo">Review now</button></div>`
-  :`<div class="hero"><div class="big">✓</div><div><h2>You’re caught up</h2><p>${misses.length+Object.keys(attempts).length?'Nothing is due. Practice to find new weak spots.':'Start practicing and the app will learn your weak spots.'}</p></div><button class="pri" id="revGo">Practice</button></div>`;
+ $('#hero').innerHTML=due.length?`<div class="hero">${ECG}<div class="big">${due.length}</div><div><h2>in triage today</h2><p>${names.slice(0,3).map(esc).join(' · ')}${names.length>3?` +${names.length-3} more`:''}</p></div><button class="pri" id="revGo">Review now</button></div>`
+  :`<div class="hero calm">${ECG}<div class="big">0</div><div><h2>All stable</h2><p>${misses.length+Object.keys(attempts).length?'Nothing is due. Practice to find new weak spots.':'Start practicing and the app will learn your weak spots.'}</p></div><button class="pri" id="revGo">Practice</button></div>`;
  $('#revGo').onclick=()=>due.length?startRun({units:due.slice(0,15).map(k=>({k})),mode:'single',label:'Review'}):go('practice');
  const hist=Object.values(attempts).flatMap(a=>a.hist||[]),wk=hist.filter(h=>now-Date.parse(h.at)<7*DAY);
  const mastered=Object.keys(ENT).filter(k=>(attempts[k]?.reps||0)>=2&&(s[k].mast||0)>=.7).length,last=exams.at(-1);
@@ -347,9 +399,9 @@ function renderHome(){
  <div class="ringgrid">${Object.keys(SEC).map(k=>{const a=secAcc(k),ks=allK.filter(x=>BY[ENT[x].cid].sec.includes(k)),c=ks.filter(x=>s[x].ev>0).length;return `<button class="ringcard" data-sec="${k}"><div class="rwrap">${ring(a.p,120,10,tone(a.p))}<div class="rlabel"><b>${a.p==null?'—':Math.round(a.p*100)+'%'}</b><small>right</small></div></div><div class="rname">${SEC[k]}</div><div class="mtxt">${a.n} question${a.n===1?'':'s'} · ${c}/${ks.length} covered</div></button>`}).join('')}</div>`;
  for(const b of $$('.ringcard'))b.onclick=()=>{setSeg('#gSec',b.dataset.sec);go('progress')};
  const weak=Object.keys(ENT).filter(k=>s[k].ev>0).sort((a,b)=>(s[a].mast??1)-(s[b].mast??1)||s[b].pri-s[a].pri).slice(0,6);
- $('#weak').innerHTML=weak.length?weak.map(k=>subRow(k,s,true)).join(''):'<p class="empty">Your weak spots will show up here after you practice.</p>';
+ $('#weak').innerHTML=weak.length?weak.map(k=>subRow(k,s,true)).join(''):'<p class="empty">Subtopics that need work show up here after you practice.</p>';
 }
-function subRow(k,s,showTopic){const e=ENT[k],t=s[k];return `<div class="srow"><div class="sname"><b>${esc(e.name)}</b>${showTopic?`<small>${e.name.startsWith(BY[e.cid].name)?'':esc(BY[e.cid].name)+' · '}${SEC[BY[e.cid].sec[0]]}</small>`:''}</div><div class="sbar">${meter(t.mast)}<small>${t.ev?`${pct(t.mast)}${t.due<=Date.now()?' · <em>due</em>':''}`:'Not practiced'}</small></div><button class="sm" data-q="${k}">Quiz</button></div>`}
+function subRow(k,s,showTopic){const e=ENT[k],t=s[k];return `<div class="srow"><div class="sname"><b>${esc(e.name)}</b>${showTopic?`<small>${e.name.startsWith(BY[e.cid].name)?'':esc(BY[e.cid].name)+' · '}${SEC[BY[e.cid].sec[0]]}</small>`:''}</div><div class="sbar">${meter(t.mast)}<small>${tag(t.mast)}${t.ev?` ${pct(t.mast)}${t.due<=Date.now()?' · <em>due</em>':''}`:''}</small></div><button class="sm" data-q="${k}">Quiz</button></div>`}
 let openT=new Set();
 function renderProgress(){
  const s=stats(),sec=segVal('#gSec'),q=$('#gQ').value.trim().toLowerCase();
@@ -368,7 +420,7 @@ function renderMistakes(){
 function renderScores(){const l=exams;$('#sTable').innerHTML=l.length?`<thead><tr><th>Date</th><th>Test</th><th>C/P</th><th>CARS</th><th>B/B</th><th>P/S</th><th>Total</th></tr></thead><tbody>${l.map(e=>`<tr><td>${esc(e.date)}</td><td>${esc(e.name)}</td><td class="n">${e.cp}</td><td class="n">${e.cars}</td><td class="n">${e.bb}</td><td class="n">${e.ps}</td><td class="n"><b>${e.total}</b></td></tr>`).join('')}</tbody>`:'<tbody><tr><td class="empty">No scores yet.</td></tr></tbody>'}
 function renderSettings(){
  const isArt=ai?.kind==='claude';
- $('#aiCard').innerHTML=isArt?`<p style="margin:0"><b>Questions are made by Claude</b> through your claude.ai account. Nothing to set up.</p>`:`<p style="margin:0 0 6px"><b>Claude API key</b></p><p class="mtxt" style="margin:0 0 14px">Fulcrum uses Claude to write questions. Get a key at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> and paste it here. It stays in this browser and is only sent to Anthropic. Usage is billed to your Anthropic account.</p>
+ $('#aiCard').innerHTML=isArt?`<p style="margin:0"><b>Questions are made by Claude</b> through your claude.ai account. Nothing to set up.</p>`:`<p style="margin:0 0 6px"><b>Claude API key</b></p><p class="mtxt" style="margin:0 0 14px">Triage uses Claude to write questions. Get a key at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> and paste it here. It stays in this browser and is only sent to Anthropic. Usage is billed to your Anthropic account.</p>
   <div class="row"><input id="kIn" type="password" placeholder="sk-ant-…" value="${esc(ls.get('key',''))}" style="flex:1 1 260px;width:auto" autocomplete="off"><select id="kModel" style="width:auto;flex:0 0 auto"><option value="claude-sonnet-5-5">Sonnet (best)</option><option value="claude-haiku-5-5">Haiku (cheaper, faster)</option></select><button class="pri" id="kSave">Save</button></div><p class="mtxt" id="kMsg"></p>`;
  if(!isArt){$('#kModel').value=ls.get('model','claude-sonnet-5-5');$('#kSave').onclick=()=>{ls.set('key',$('#kIn').value.trim());ls.set('model',$('#kModel').value);$('#kMsg').textContent='Saved.'}}
  $('#dataNote').textContent=db?.local?'Your progress is saved in this browser only. Export it to back it up or move it to another computer.':'Your progress is saved to your claude.ai account.';
@@ -524,7 +576,7 @@ function answer(q,k){
  $('#fb').innerHTML=`<div class="fb ${ok?'good':'bad'}"><strong>${ok?'Correct':'Not quite. It’s '+L[q.answer]}</strong><p>${esc(q.explanation)}</p>${q.takeaway?`<div class="take">${esc(q.takeaway)}</div>`:''}</div>
  ${ok?'':`<form class="coach" id="diag"><b>Why did you pick ${L[k]}?</b> <span class="mtxt">Optional</span><div class="row" style="margin-top:8px"><input id="dWhy" placeholder="What were you thinking?" style="flex:1 1 220px;width:auto"><button class="sm" type="submit">Explain my mistake</button></div><div id="dOut"></div></form>`}
  <div class="row" style="margin-top:16px"><button class="pri big" id="nx">${last?'See results':'Next'}</button></div>`;
- if(!ok)saveMiss({key:q.k,error:'Content gap',note:'',source:'Fulcrum practice',section:q.sec,auto:true});
+ if(!ok)saveMiss({key:q.k,error:'Content gap',note:'',source:'Triage practice',section:q.sec,auto:true});
  $('#nx').onclick=()=>{run.k++;if(run.k>=run.cur.qs.length){run.u++;run.k=0;run.cur=null}showQ()};
  if(!ok)$('#diag').onsubmit=e=>{e.preventDefault();diagnose(q,k,$('#dWhy').value.trim())};
  $('#nx').focus({preventScroll:true});$('#fb').scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -598,7 +650,7 @@ $('#sDate').value=today();
 $('#sForm').onsubmit=async e=>{e.preventDefault();if(!db)return;const v=['#sCP','#sCARS','#sBB','#sPS'].map(x=>+$(x).value);$('#sMsg').textContent='Saving…';
  try{await db.collection('exams').add({date:$('#sDate').value,name:$('#sName').value.trim(),cp:v[0],cars:v[1],bb:v[2],ps:v[3],total:v.reduce((a,b)=>a+b,0)});$('#sMsg').textContent='Saved.';e.target.reset();$('#sDate').value=today()}catch{$('#sMsg').textContent='Couldn’t save.'}};
 $('#expBtn').onclick=async()=>{const data={misses,attempts,exams,captures,version:2};const txt=JSON.stringify(data);
- if(db?.local){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download='fulcrum-backup.json';a.click();$('#dataMsg').textContent='Downloaded.'}
+ if(db?.local){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download='triage-backup.json';a.click();$('#dataMsg').textContent='Downloaded.'}
  else{try{await navigator.clipboard.writeText(txt);$('#dataMsg').textContent='Copied to your clipboard.'}catch{$('#dataMsg').textContent='Couldn’t copy.'}}};
 $('#impFile').onchange=async e=>{const f=e.target.files[0];if(!f||!db)return;try{const d=JSON.parse(await f.text());
  for(const m of d.misses||[]){const{id,key,...rest}=m;await db.doc('misses/'+(id||('i'+Math.random().toString(36).slice(2)))).set(rest)}

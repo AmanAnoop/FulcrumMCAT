@@ -1,6 +1,6 @@
-# Fulcrum MCAT
+# Triage MCAT
 
-Practice that finds your weak MCAT subtopics and keeps quizzing you on them until they stick.
+Triage your MCAT prep: find the subtopics you miss, treat them first, and keep checking until they’re stable.
 
 - **Practice** — press Start. Claude writes MCAT-style questions (with graphs, tables and molecule drawings) aimed at what you get wrong.
 - **Review** — anything you miss comes back on a schedule, like Anki: soon after a miss, then less often as you get it right.
@@ -18,15 +18,15 @@ Your progress is saved in your browser. Use **Settings → Export** to back it u
 
 ## Chrome helper (optional)
 
-The helper adds a **Send to Fulcrum** button on UWorld, AAMC, Blueprint, Kaplan, Jack Westin and other MCAT sites. Click it after a question (or turn on **Auto-send after each answer**), and the next time Fulcrum is open your misses are saved under the right subtopics and ready to practice.
+The helper adds a **Send to Triage** button on UWorld, AAMC, Blueprint, Kaplan, Jack Westin and other MCAT sites. Click it after a question (or turn on **Auto-send after each answer**), and the next time Triage is open your misses are saved under the right subtopics and ready to practice.
 
 1. Download this repo (**Code → Download ZIP**) and unzip it.
 2. Open `chrome://extensions` and turn on **Developer mode**.
 3. Click **Load unpacked** and pick the `extension` folder.
 
-The helper only reads a page when you click the button (or when auto-send is on and an answer is showing). It hands the text to your open Fulcrum tab, which asks Claude which subtopic each question tests. Fulcrum saves the subtopic and a short note, not the question itself.
+The helper only reads a page when you click the button (or when auto-send is on and an answer is showing). It hands the text to your open Triage tab, which asks Claude which subtopic each question tests. Triage saves the subtopic and a short note, not the question itself.
 
-If you host Fulcrum somewhere other than `github.io`, add your address to the second `matches` list in `extension/manifest.json`.
+If you host Triage somewhere other than `github.io`, add your address to the second `matches` list in `extension/manifest.json`.
 
 ## Put it on GitHub Pages
 
@@ -37,4 +37,4 @@ If you host Fulcrum somewhere other than `github.io`, add your address to the se
 ## Notes
 
 - Topics and subtopics follow the AAMC *What's on the MCAT Exam?* content outline.
-- Fulcrum is a study tool made by students. It is not affiliated with the AAMC, UWorld or any test-prep company, and its questions are written by AI, so double-check anything that looks off.
+- Triage is a study tool made by students. It is not affiliated with the AAMC, UWorld or any test-prep company, and its questions are written by AI, so double-check anything that looks off.
