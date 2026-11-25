@@ -2,10 +2,13 @@
 
 Triage your MCAT prep: find the subtopics you miss, treat them first, and keep checking until they’re stable.
 
-- **Practice** — press Start. Claude writes MCAT-style questions (with graphs, tables and molecule drawings) aimed at what you get wrong.
-- **Review** — anything you miss comes back on a schedule, like Anki: soon after a miss, then less often as you get it right.
-- **Progress** — every topic on the AAMC content outline, each with its own subtopics and progress bar. Tap any subtopic to quiz just that.
-- **Mistakes** — every miss, and why you missed it.
+- **Today** — a projected score trajectory (with a likely range, your practice tests and your target), live vitals for accuracy, retention, coverage and streak, and a daily plan.
+- **Practice** — quick questions, MCAT-style passage sets with figures, or timed exam mode with highlighting, cross-outs and flags. Every set is aimed at your weakest subtopics.
+- **Flashcards** — spaced repetition (Again / Hard / Good / Easy). A card is added automatically for every idea you miss, and you can make full decks for any subtopic.
+- **Library** — the whole AAMC outline. Each subtopic has a study guide (key ideas, equations, a worked example, MCAT traps), your own notes, your misses and its cards.
+- **Analytics and Mistake log** — section projections, an activity calendar, mastery by discipline, practice-test history, and every miss with why it happened.
+
+Press **⌘K** (or **/**) anywhere to jump to a subtopic or action.
 
 ## Use it
 
