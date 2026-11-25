@@ -264,6 +264,39 @@ button.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}button.
 .prog i{background:var(--ink)}.take{border-left-color:var(--ink)}
 .hy{color:var(--mute);border-color:var(--line2);background:none}
 button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:var(--red)}
+
+/* refined hero with cardiac monitor */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;padding:0;align-items:stretch;border-radius:18px;overflow:hidden;background:#121416}
+.hero .hl{padding:34px 36px 32px;display:flex;flex-direction:column;align-items:flex-start}
+.eyebrow{font-size:12.5px;color:#a19f97;font-weight:500;margin-bottom:6px}
+.hero .big{font:400 104px/.9 "Instrument Serif",Georgia,serif;color:#fff;margin:0 0 14px}
+.hero p{color:#c9c6bd;font-size:14px;line-height:1.7;margin:0 0 22px}.hero p .more{color:#8f8d86}
+.hero button.pri{margin-top:auto}
+.monitor{position:relative;background:#0b0d0e;border-left:1px solid #222427;min-height:250px;overflow:hidden;
+ background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+ background-size:40px 40px,40px 40px,8px 8px,8px 8px}
+.mtop{position:absolute;left:20px;right:20px;top:16px;display:flex;justify-content:space-between;font-size:12px;color:#9d9a92;z-index:2}
+.mtop span:first-child{display:flex;align-items:center;gap:8px;color:#e8e6e0;font-weight:500}
+.blink{width:7px;height:7px;border-radius:50%;background:#ff5a5f;box-shadow:0 0 8px #ff5a5f;animation:bl 1.6s ease-in-out infinite}
+.monitor.ok .blink{background:#5fd39a;box-shadow:0 0 8px #5fd39a}
+@keyframes bl{50%{opacity:.25}}
+.ecg{position:absolute;left:0;right:0;top:56px;bottom:26px;width:100%;height:calc(100% - 82px);opacity:1;inset:auto}
+.monitor .ecg{top:56px;height:calc(100% - 82px)}
+.ecg path{fill:none;stroke-linejoin:round;stroke-linecap:round}
+.ecg .base{stroke:#ff5a5f;stroke-opacity:.16;stroke-width:1.5}
+.ecg .sweep{stroke:#ff6b6f;stroke-width:2.2;stroke-dasharray:150 850;stroke-dashoffset:150;filter:drop-shadow(0 0 4px rgba(255,90,95,.75));animation:sweep 3.6s linear infinite}
+.monitor.ok .ecg .base{stroke:#5fd39a}.monitor.ok .ecg .sweep{stroke:#6ee0a8;filter:drop-shadow(0 0 4px rgba(95,211,154,.7))}
+@keyframes sweep{from{stroke-dashoffset:150}to{stroke-dashoffset:-850}}
+.head{display:none}
+@media(prefers-reduced-motion:reduce){.ecg .sweep{animation:none;stroke-dasharray:none}.blink{animation:none}}
+/* quieter, finer surfaces */
+.card,.panel,.stats,.list,.bars,.tablewrap,.ringbig,.ringcard{box-shadow:0 1px 0 rgba(21,23,26,.03);border-color:var(--line)}
+.ringcard{padding:24px 12px 18px}.ringbig{padding:28px 32px}
+.stat b{font-size:clamp(42px,4.8vw,58px)}
+.stat small,.ringcard .mtxt,.rlabel small{letter-spacing:.01em}
+main{padding-top:56px}
+h2{font-size:16.5px}
+@media(max-width:760px){.hero{grid-template-columns:minmax(0,1fr)}.monitor{border-left:0;border-top:1px solid #222427;min-height:170px}.hero .hl{padding:26px 24px}.hero .big{font-size:84px}.hero button.pri{width:100%}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head><body>
@@ -408,14 +441,17 @@ const pct=m=>m==null?'—':Math.round(m*100)+'%';
 function meter(m,wide){return `<div class="meter ${mClass(m)}${wide?' wide':''}"><i style="width:${m==null?0:Math.round(m*100)}%"></i></div>`}
 
 /* ---------- views ---------- */
-const ECG='<svg class="ecg" viewBox="0 0 600 80" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,48 120,48 140,48 152,40 162,48 182,48 192,58 204,8 216,72 228,48 262,48 280,34 300,48 420,48 440,48 452,40 462,48 482,48 492,58 504,8 516,72 528,48 562,48 580,34 600,48"/></svg>';
+const ECGD='M0,60 L14,60 C17,60 19,51 24,51 C29,51 31,60 34,60 L40,60 L43,66 L48,14 L53,90 L57,60 L66,60 C72,60 75,44 83,44 C91,44 94,60 100,60 L120,60 L134,60 C137,60 139,51 144,51 C149,51 151,60 154,60 L160,60 L163,66 L168,14 L173,90 L177,60 L186,60 C192,60 195,44 203,44 C211,44 214,60 220,60 L240,60 L254,60 C257,60 259,51 264,51 C269,51 271,60 274,60 L280,60 L283,66 L288,14 L293,90 L297,60 L306,60 C312,60 315,44 323,44 C331,44 334,60 340,60 L360,60 L374,60 C377,60 379,51 384,51 C389,51 391,60 394,60 L400,60 L403,66 L408,14 L413,90 L417,60 L426,60 C432,60 435,44 443,44 C451,44 454,60 460,60 L480,60';
+const ECG=(ok)=>`<div class="monitor ${ok?'ok':''}"><div class="mtop"><span><i class="blink"></i>${ok?'Stable':'In triage'}</span><span>${MON}</span></div><svg class="ecg" viewBox="0 0 480 110" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="${ECGD}" pathLength="1000"/><path class="sweep" d="${ECGD}" pathLength="1000"/></svg><div class="head" style="offset-path:path('${ECGD}')"></div></div>`;
+let MON='';
 function tag(m){return m==null?'<span>Not practiced</span>':m<.4?'<span class="tag t-red">Needs work</span>':m<.7?'<span class="tag t-yel">Getting there</span>':'<span class="tag t-grn">Solid</span>'}
 function renderHome(){
  const s=stats(),due=dueList(),now=Date.now();
  $('#dueBadge').hidden=!due.length;$('#dueBadge').textContent=due.length;
  const names=[...new Set(due.map(k=>ENT[k].name))];
- $('#hero').innerHTML=due.length?`<div class="hero">${ECG}<div class="big">${due.length}</div><div><h2>in triage today</h2><p>${names.slice(0,3).map(esc).join(' · ')}${names.length>3?` +${names.length-3} more`:''}</p></div><button class="pri" id="revGo">Review now</button></div>`
-  :`<div class="hero calm">${ECG}<div class="big">0</div><div><h2>All stable</h2><p>${misses.length+Object.keys(attempts).length?'Nothing is due. Practice to find new weak spots.':'Start practicing and the app will learn your weak spots.'}</p></div><button class="pri" id="revGo">Practice</button></div>`;
+ {const h0=Object.values(attempts).flatMap(a=>a.hist||[]).filter(h=>now-Date.parse(h.at)<7*DAY);MON=h0.length?`${Math.round(h0.filter(h=>h.ok).length/h0.length*100)}% right · 7 days`:'No readings yet'}
+ $('#hero').innerHTML=due.length?`<div class="hero"><div class="hl"><div class="eyebrow">In triage today</div><div class="big">${due.length}</div><p>${names.slice(0,3).map(esc).join('<br>')}${names.length>3?`<br><span class="more">and ${names.length-3} more</span>`:''}</p><button class="pri" id="revGo">Review now</button></div>${ECG(false)}</div>`
+  :`<div class="hero calm"><div class="hl"><div class="eyebrow">All stable</div><div class="big">0</div><p>${misses.length+Object.keys(attempts).length?'Nothing is due right now.<br>Practice to find new weak spots.':'Start practicing and Triage<br>will learn your weak spots.'}</p><button class="pri" id="revGo">Practice</button></div>${ECG(true)}</div>`;
  $('#revGo').onclick=()=>due.length?startRun({units:due.slice(0,15).map(k=>({k})),mode:'single',label:'Review'}):go('practice');
  const hist=Object.values(attempts).flatMap(a=>a.hist||[]),wk=hist.filter(h=>now-Date.parse(h.at)<7*DAY);
  const mastered=Object.keys(ENT).filter(k=>(attempts[k]?.reps||0)>=2&&(s[k].mast||0)>=.7).length,last=exams.at(-1);
@@ -424,8 +460,8 @@ function renderHome(){
  const allK=Object.keys(ENT).filter(k=>!ENT[k].gen),cov=allK.filter(k=>s[k].ev>0).length;
  const ring=(p,size,stroke,cls)=>{const R=(size-stroke)/2,L=2*Math.PI*R,v=p==null?0:Math.max(0,Math.min(1,p));return `<svg viewBox="0 0 ${size} ${size}" class="ring ${cls||''}" role="img" aria-label="${p==null?'no data':Math.round(v*100)+'%'}"><circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none" stroke="var(--line)" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none" stroke="currentColor" stroke-width="${stroke}" stroke-linecap="${v<.03?'butt':'round'}" stroke-dasharray="${(L*v).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`};
  const tone=p=>p==null?'na':p<.5?'lo':p<.75?'mid':'hi';
- $('#rings').innerHTML=`<div class="ringbig"><div class="rwrap big">${ring(cov/allK.length,200,14,'ink')}<div class="rlabel"><b>${Math.round(cov/allK.length*100)}%</b><small>covered</small></div></div><div><h2>Outline covered</h2><p class="mtxt">${cov} of ${allK.length} AAMC subtopics practiced. Each practice question, review, or question sent from UWorld fills this in.</p></div></div>
- <div class="ringgrid">${Object.keys(SEC).map(k=>{const a=secAcc(k),ks=allK.filter(x=>BY[ENT[x].cid].sec.includes(k)),c=ks.filter(x=>s[x].ev>0).length;return `<button class="ringcard" data-sec="${k}"><div class="rwrap">${ring(a.p,120,10,tone(a.p))}<div class="rlabel"><b>${a.p==null?'—':Math.round(a.p*100)+'%'}</b><small>right</small></div></div><div class="rname">${SEC[k]}</div><div class="mtxt">${a.n} question${a.n===1?'':'s'} · ${c}/${ks.length} covered</div></button>`}).join('')}</div>`;
+ $('#rings').innerHTML=`<div class="ringbig"><div class="rwrap big">${ring(cov/allK.length,200,7,'ink')}<div class="rlabel"><b>${Math.round(cov/allK.length*100)}%</b><small>covered</small></div></div><div><h2>Outline covered</h2><p class="mtxt">${cov} of ${allK.length} AAMC subtopics practiced. Each practice question, review, or question sent from UWorld fills this in.</p></div></div>
+ <div class="ringgrid">${Object.keys(SEC).map(k=>{const a=secAcc(k),ks=allK.filter(x=>BY[ENT[x].cid].sec.includes(k)),c=ks.filter(x=>s[x].ev>0).length;return `<button class="ringcard" data-sec="${k}"><div class="rwrap">${ring(a.p,120,6,tone(a.p))}<div class="rlabel"><b>${a.p==null?'—':Math.round(a.p*100)+'%'}</b><small>right</small></div></div><div class="rname">${SEC[k]}</div><div class="mtxt">${a.n} question${a.n===1?'':'s'} · ${c}/${ks.length} covered</div></button>`}).join('')}</div>`;
  for(const b of $$('.ringcard'))b.onclick=()=>{setSeg('#gSec',b.dataset.sec);go('progress')};
  const weak=Object.keys(ENT).filter(k=>s[k].ev>0).sort((a,b)=>(s[a].mast??1)-(s[b].mast??1)||s[b].pri-s[a].pri).slice(0,6);
  $('#weak').innerHTML=weak.length?weak.map(k=>subRow(k,s,true)).join(''):'<p class="empty">Subtopics that need work show up here after you practice.</p>';
@@ -534,11 +570,27 @@ async function drawMols(root){
 
 
 /* ---------- question writing ---------- */
+const STYLE=`Write it the way the AAMC writes real MCAT items:
+- The four answer choices are parallel: same grammatical form, same level of detail, and close to the same length (within about 15% of each other). The correct answer must never stand out as the longest, most detailed or most carefully hedged choice. Sometimes make a wrong choice the longest.
+- Every wrong choice is tempting because it reflects a specific, common mistake: a reversed relationship, the wrong variable or structure, a misread figure, a unit or sign slip, or a true statement that does not answer the question. No silly options, no 'all of the above' or 'none of the above'.
+- Do not put qualifiers like 'may' or 'can' only in the correct choice, or absolutes like 'always' or 'never' only in wrong ones.
+- Numeric choices share units and significant figures, and the wrong values come from realistic errors (off by a factor of 2 or 10, a flipped sign, a skipped step).
+- Stems are short and direct, such as 'Which of the following…', 'Based on Figure 1…' or 'The results most strongly support…'. Occasionally use I/II/III statement items.
+- Test reasoning and application of the concept, not trivia recall.`;
 const QSPEC=`"stem": string, "choices": [4 strings, no letter prefixes], "answer": index 0-3, "explanation": "2 to 3 short sentences a high-school student can follow", "wrong": [4 short reasons each choice is wrong, "" for the correct one], "takeaway": "one short rule to remember", "choiceSmiles": null or [4 valid SMILES] when the answer choices are molecules (then make choices short labels)`;
 function context(k){
  const e=ENT[k],c=BY[e.cid],past=misses.filter(m=>m.key===k||(m.concept===e.cid&&m.key?.endsWith('~g'))).slice(0,5).map(m=>m.note).filter(Boolean).join(' | ');
  const angles=[...new Set(bankItems.filter(b=>b.concept===e.cid&&b.tests).map(b=>b.tests))].slice(0,4).join(' | ');
  return `Topic: ${c.name} (AAMC ${c.cat}). Subtopic to test: ${e.full}.${past?` The student has gotten this wrong before: ${past}. Target that mistake from a new angle.`:''}${angles?` Real practice exams test it like this: ${angles}. Use a new scenario and new wording.`:''}`;
+}
+function biased(q){if(!q||!Array.isArray(q.choices)||q.choices.length!==4||q.choiceSmiles)return false;const L=q.choices.map(c=>String(c).trim().length),a=+q.answer,o=L.filter((_,i)=>i!==a),mx=Math.max(...o),avg=o.reduce((x,y)=>x+y,0)/3;return L[a]>=mx+6&&(L[a]>mx*1.15||L[a]>avg*1.35)}
+async function unbias(list){
+ const bad=list.map((q,i)=>[q,i]).filter(([q])=>biased(q));if(!bad.length)return;
+ try{const v=await ai.json(`These MCAT practice questions give away the answer: the correct choice is noticeably longer or more detailed than the others. Rewrite the answer choices so all four in each question are parallel and within about 15% of each other in length. Keep the same correct choice at the same index with the same meaning, keep each wrong choice tempting, and update the matching "wrong" reasons.
+${bad.map(([q],n)=>`Question ${n}: ${q.stem}\nChoices: ${JSON.stringify(q.choices)}\nCorrect index: ${q.answer}\nWrong reasons: ${JSON.stringify(q.wrong||[])}`).join('\n\n')}
+Return JSON: {"questions": [{"choices": [4 strings], "wrong": [4 strings]} in the same order]}`,{});
+  (v?.questions||[]).forEach((f,n)=>{const q=bad[n]?.[0];if(q&&Array.isArray(f?.choices)&&f.choices.length===4){q.choices=f.choices;if(Array.isArray(f.wrong)&&f.wrong.length===4)q.wrong=f.wrong}});
+ }catch{}
 }
 function shuffleQ(v,k,sec){
  if(!v||!Array.isArray(v.choices)||v.choices.length!==4||!(v.answer>=0&&v.answer<=3))return null;
@@ -551,9 +603,10 @@ async function genSingle(k,sec){
 ${context(k)}
 ${cars?'Write an original 200 to 260 word passage like an MCAT CARS excerpt, then one question on this skill. Each wrong choice uses a real CARS trap (true but irrelevant, distortion, too extreme, out of scope, opposite). No figure.':`Start with a short 2 to 4 sentence experiment or clinical setup like the real MCAT. Add a figure whenever the real exam would (data table, graph, molecule structures, energy diagram, circuit). Wrong choices are real misconceptions or common slips. Numbers must work out exactly and match the figure.
 ${FIG_SPEC}`}
+${STYLE}
 Plain text only; write formulas inline.
 Return JSON: {"passage": string ("" if none), "figure": figure object or null, ${QSPEC}}`;
- const v=await ai.json(prompt,{});const q=shuffleQ(v,k,s);if(!q)throw{code:'format',message:'The question came back broken.'};
+ const v=await ai.json(prompt,{});await unbias([v]);const q=shuffleQ(v,k,s);if(!q)throw{code:'format',message:'The question came back broken.'};
  return{passage:v.passage||'',figures:q.figure?[q.figure]:[],qs:[q]};
 }
 async function genPassage(k,sec){
@@ -562,15 +615,17 @@ async function genPassage(k,sec){
  if(!opts.includes(k))opts.unshift(k);
  const list=opts.map((x,i)=>`${i} = ${ENT[x].full}`).join('; ');
  const prompt=cars?`Write an original MCAT CARS passage set: a 500 to 600 word humanities or social-science passage with a clear argument, then 5 questions (main idea, detail, reasoning within, reasoning beyond). Each wrong choice uses a real CARS trap.
+${STYLE}
 Skill focus: ${c.name}.
 Tag each question with "sub": 0.
 Return JSON: {"title": str, "passage": str, "figures": [], "questions": [5 objects {"sub": 0, ${QSPEC}}]}`:
 `Write an original MCAT ${SEC[s]} passage set like the real exam: a 250 to 400 word passage describing a realistic experiment or clinical study on ${c.name}, with 1 or 2 figures of its data or key structures (called Figure 1, Figure 2 in the text).
 ${context(k)}
 Then 5 questions: at least 2 need the figures, 1 tests experimental design, 1 or 2 test outside knowledge. Tag each question with "sub" = the number of the subtopic it tests from: ${list}. Numbers must match the figures.
+${STYLE}
 ${FIG_SPEC}
 Return JSON: {"title": str, "passage": str, "figures": [1 or 2 figures], "questions": [5 objects {"sub": number, ${QSPEC}}]}`;
- const v=await ai.json(prompt,{tier:'complex'});
+ const v=await ai.json(prompt,{tier:'complex'});await unbias(v?.questions||[]);
  const qs=(v?.questions||[]).map(x=>shuffleQ(x,opts[x.sub]??k,s)).filter(Boolean);
  if(!v?.passage||qs.length<3)throw{code:'format',message:'The passage came back broken.'};
  return{title:v.title||'',passage:v.passage,figures:(v.figures||[]).slice(0,2),qs};
